@@ -1,2 +1,2 @@
-# andrei-dureika
+# andrei dureika
 Andrei Dureika. Portfolio
