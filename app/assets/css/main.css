@@ -9,3 +9,14 @@
 @import './layers/components.css' layer(components);
 @import './layers/utilities.css' layer(utilities);
 @import './layers/frameworks.css' layer(frameworks);
+
+/* Test style to verify CSS is loading */
+body {
+  background-color: #f8f9fa !important;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
