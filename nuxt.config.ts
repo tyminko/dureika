@@ -4,5 +4,8 @@ export default defineNuxtConfig({
     '@nuxt/content'
   ],
   // ssr: false,
-  css: ['~/assets/css/main.css']
+  css: ['~/assets/css/main.css'],
+  app: {
+    baseURL: '/dureika/'
+  }
 })
