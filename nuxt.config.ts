@@ -3,6 +3,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content'
   ],
-  ssr: true,
+  // ssr: false,
   css: ['~/assets/css/main.css']
 })

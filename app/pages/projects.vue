@@ -19,7 +19,13 @@
 
     <!-- Projects Grid -->
     <div class="grid grid-cols-3">
-      <ProjectCard v-for="project in filteredProjects" :key="project._path" :project="project" />
+      <div v-for="project in filteredProjects" :key="project.path" class="project-card">
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description }}</p>
+        <div v-if="project.tags" class="tags">
+          <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
+        </div>
+      </div>
     </div>
 
     <!-- No results message -->
@@ -34,10 +40,9 @@ const selectedTags = ref([])
 
 // Fetch all projects
 const { data: projects } = await useAsyncData('all-projects', () =>
-  queryContent('projects')
-    .where({ _path: { $ne: '/projects' } })
-    .sort({ date: -1 })
-    .find()
+  queryCollection('content')
+    .where('path', 'LIKE', '/projects/%')
+    .all()
 )
 
 // Get all unique tags
