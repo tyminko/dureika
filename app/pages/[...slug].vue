@@ -2,9 +2,9 @@
 const route = useRoute()
 
 // Skip API routes, static files, and project paths
-if (route.path.startsWith('/api/') || 
-    route.path.includes('.') || 
-    route.path.startsWith('/projects/')) {
+if (route.path.startsWith('/api/') ||
+  route.path.includes('.') ||
+  route.path.startsWith('/projects/')) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Page not found'
