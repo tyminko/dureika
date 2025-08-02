@@ -9,10 +9,20 @@ if (route.path.startsWith('/api/') || route.path.includes('.')) {
   })
 }
 
-// Use queryCollection to get the parsed content (Nuxt 4 approach)
+// Debug: Let's see what collections are available
+const { data: allContent } = await useAsyncData('debug-all', () => {
+  return queryCollection('content').all()
+})
+
+// Debug: Let's see what we get for this specific path
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('content').path(route.path).first()
 })
+
+// Log for debugging
+console.log('Route path:', route.path)
+console.log('All content:', allContent.value)
+console.log('Page content:', page.value)
 </script>
 
 <template>
@@ -25,6 +35,17 @@ const { data: page } = await useAsyncData(route.path, () => {
         <h1>Page Not Found</h1>
         <p>Oops! The content you're looking for doesn't exist.</p>
         <p>Path: {{ route.path }}</p>
+
+        <!-- Debug info -->
+        <div v-if="allContent">
+          <h2>Available content:</h2>
+          <ul>
+            <li v-for="item in allContent" :key="item.path">
+              {{ item.path }} - {{ item.title }}
+            </li>
+          </ul>
+        </div>
+
         <NuxtLink to="/">Go back home</NuxtLink>
       </div>
     </template>
