@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 const route = useRoute()
 
-// Skip API routes and static files
-if (route.path.startsWith('/api/') || route.path.includes('.')) {
+// Skip API routes, static files, and project paths
+if (route.path.startsWith('/api/') || 
+    route.path.includes('.') || 
+    route.path.startsWith('/projects/')) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Page not found'
