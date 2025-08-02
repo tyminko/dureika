@@ -5,6 +5,7 @@ const route = useRoute()
 if (route.path.startsWith('/api/') ||
   route.path.includes('.') ||
   route.path.startsWith('/projects/')) {
+  // Don't handle project paths here - let the specific route handle them
   throw createError({
     statusCode: 404,
     statusMessage: 'Page not found'
