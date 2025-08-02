@@ -19,13 +19,13 @@
 
     <!-- Projects Grid -->
     <div class="grid grid-cols-3">
-      <div v-for="project in filteredProjects" :key="project.path" class="project-card">
+      <NuxtLink v-for="project in filteredProjects" :key="project.path" :to="project.path" class="project-card">
         <h3>{{ project.title }}</h3>
         <p>{{ project.description }}</p>
         <div v-if="project.tags" class="tags">
           <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
         </div>
-      </div>
+      </NuxtLink>
     </div>
 
     <!-- No results message -->
@@ -83,3 +83,34 @@ useHead({
   ]
 })
 </script>
+
+<style scoped>
+.filter-buttons {
+  @apply flex flex-wrap gap-2 mb-6;
+}
+
+.filter-btn {
+  @apply px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors;
+}
+
+.filter-btn.active {
+  @apply bg-blue-500 text-white border-blue-500;
+}
+
+.project-card {
+  @apply p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow hover:border-blue-300;
+  @apply text-decoration-none;
+}
+
+.project-card:hover {
+  @apply text-decoration-none;
+}
+
+.tags {
+  @apply flex flex-wrap gap-2 mt-4;
+}
+
+.tag {
+  @apply px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm;
+}
+</style>
