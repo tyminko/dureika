@@ -9,7 +9,7 @@ if (route.path.startsWith('/api/') || route.path.includes('.')) {
   })
 }
 
-// Use queryCollection to get the parsed content (Nuxt Content v3 approach)
+// Use queryCollection to get the parsed content (Nuxt 4 approach)
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('content').path(route.path).first()
 })
