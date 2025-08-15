@@ -5,8 +5,13 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "clean:content": "rm -rf .data/content .nuxt",
+    "dev:clean": "npm run clean:content && nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "nuxt prepare && eslint .",
+    "lint:fix": "nuxt prepare && eslint . --fix"
   },
   "dependencies": {
     "@nuxt/content": "^3.6.3",
@@ -16,8 +21,17 @@
     "@nuxt/test-utils": "^3.19.2",
     "better-sqlite3": "^12.2.0",
     "eslint": "^9.32.0",
+    "glob": "^11.0.0",
+    "image-size": "^1.1.1",
+    "jimp": "^0.22.12",
+    "thumbhash": "^0.1.1",
     "nuxt": "^4.0.1",
+    "probe-image-size": "^7.2.3",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.13",
+    "@types/probe-image-size": "^7.2.5"
   }
 }

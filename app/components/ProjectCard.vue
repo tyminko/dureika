@@ -1,7 +1,16 @@
 <template>
   <div class="project-card">
     <div>
-      <img v-if="project.image" :src="project.image" :alt="project.title" class="project-image" />
+      <ContentImage 
+        v-if="project.image" 
+        :src="project.image" 
+        :alt="project.title" 
+        :width="400"
+        :height="300"
+        :crop="'center'"
+        :focus="'auto'"
+        class="project-image" 
+      />
       <div v-else class="project-placeholder">
         <span>{{ project.title?.charAt(0) }}</span>
       </div>
@@ -61,5 +70,17 @@ const formatDate = (dateString) => {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.project-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.project-image:hover {
+  transform: scale(1.05);
 }
 </style>

@@ -78,6 +78,42 @@ content/
     └── ...               # More projects
 ```
 
+## Environment Setup
+
+### 1. Create Environment File
+
+Copy the environment template and rename it to `.env`:
+
+```bash
+cp env.template .env
+```
+
+### 2. Configure ImageKit (Required for Image Processing)
+
+This project uses ImageKit for image optimization. You'll need to:
+
+1. Sign up for a free account at [ImageKit.io](https://imagekit.io/)
+2. Get your credentials from the dashboard
+3. Update the `.env` file with your actual values:
+
+```env
+IMAGEKIT_BASE_URL=https://ik.imagekit.io/your-actual-imagekit-id
+IMAGEKIT_PUBLIC_KEY=your_actual_public_key
+IMAGEKIT_PRIVATE_KEY=your_actual_private_key
+IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your-actual-imagekit-id
+```
+
+### 3. Environment Variables
+
+The following environment variables are available:
+
+- `IMAGEKIT_BASE_URL`: Your ImageKit base URL
+- `IMAGEKIT_PUBLIC_KEY`: Your ImageKit public key
+- `IMAGEKIT_PRIVATE_KEY`: Your ImageKit private key
+- `IMAGEKIT_URL_ENDPOINT`: Your ImageKit URL endpoint
+- `NUXT_APP_BASE_URL`: Base URL for the application (default: `/dureika/`)
+- `NODE_ENV`: Environment mode (development/production)
+
 ## Development
 
 ```bash

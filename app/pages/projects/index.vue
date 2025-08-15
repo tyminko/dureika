@@ -26,6 +26,7 @@
           <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
         </div>
       </NuxtLink>
+      <ImageComponent src="sos-alys.jpg" alt="Project 1">Asdas ## asdasdas asd</ImageComponent>
     </div>
 
     <!-- No results message -->

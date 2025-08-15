@@ -16,9 +16,9 @@ const { data: project } = await useAsyncData(`project-${projectSlug.value}`, () 
 useHead(() => ({
   title: project.value?.title ? `${project.value.title} - Portfolio` : 'Project - Portfolio',
   meta: [
-    { 
-      name: 'description', 
-      content: project.value?.description || 'Project details and information' 
+    {
+      name: 'description',
+      content: project.value?.description || 'Project details and information'
     }
   ]
 }))
@@ -32,20 +32,21 @@ useHead(() => ({
         <NuxtLink to="/projects" class="back-link">
           ← Back to Projects
         </NuxtLink>
-        
+
         <h1 class="mt-4 mb-2">{{ project.title }}</h1>
         <p class="text-lg text-gray-600 mb-4">{{ project.description }}</p>
-        
+
         <!-- Project Tags -->
         <div v-if="project.tags" class="mb-6">
           <div class="tags">
             <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
           </div>
         </div>
-        
-        <!-- Project Image -->
+
+        <!-- Project Hero Image -->
         <div v-if="project.image" class="mb-6">
-          <img :src="project.image" :alt="project.title" class="project-image" />
+          <ContentImage :src="project.image" :alt="project.title" :width="1200" :height="600" :crop="'center'"
+            :focus="'auto'" class="project-hero-image" />
         </div>
       </div>
 
@@ -54,7 +55,7 @@ useHead(() => ({
         <ContentRenderer :value="project" />
       </div>
     </template>
-    
+
     <template v-else>
       <div class="empty-page">
         <h1>Project Not Found</h1>
@@ -71,8 +72,8 @@ useHead(() => ({
   @apply text-blue-600 hover:text-blue-800 underline;
 }
 
-.project-image {
-  @apply w-full max-w-2xl rounded-lg shadow-lg;
+.project-hero-image {
+  @apply w-full max-w-4xl rounded-lg shadow-lg;
 }
 
 .tags {
