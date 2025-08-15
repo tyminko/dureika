@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@types/node-fetch": "^2.6.13",
-    "@types/probe-image-size": "^7.2.5"
+    "@types/probe-image-size": "^7.2.5",
+    "sass-embedded": "^1.90.0"
   }
 }
