@@ -8,13 +8,13 @@ date: 2024-01-15
 
 # Poki Moki
 
-![aa](external/1-y4-a0713.jpg 'Caption could be here?')
+![Sample Project Image](images/project-sample.jpg 'Sample project screenshot')
 
-![aa](external/1-y4-a0713.jpg 'SofS @YC, Kharkiv')
+![Project Demo](images/project-demo.jpg 'Project demonstration')
 
-![](external/1-y4-a0713.jpg "до коли пуки муки")
+![Development Process](images/dev-process.jpg "Development process snapshot")
 
-::im{src="external/1-y4-a0713.jpg"}
+::im{src="images/project-hero.jpg"}
   **This** is a [beautiful](/) image with a caption
 ::
 

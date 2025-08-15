@@ -20,7 +20,9 @@ type ImgLikeNode = ['img' | 'im', MinimarkElement[1] & { src: string }, ...Minim
 const imageDataCache = new Map<string, { width: number; height: number; localPath?: string; palette?: string[] }>()
 
 const publicDir = path.join(process.cwd(), 'public')
-const imagekitBaseEnv = process.env.IMAGEKIT_BASE
+// Use the same environment variable as Nuxt config
+const imagekitBaseEnv = process.env.IMAGEKIT_URL_ENDPOINT || 'https://ik.imagekit.io/dureika'
+// Fallback for external repo testing (can be removed later)
 const publicRemoteBaseEnv = process.env.PUBLIC_ASSETS_BASE
 
 export async function ContentAfterParseTransform(ctx: ParsedContextWithMinimark) {
@@ -154,17 +156,44 @@ async function resolveImageUrl(src: string): Promise<{ localPath?: string; resol
       // Fallback to original URL if download failed
       return { resolvedUrl: rel }
     } else {
+      // Handle local file paths (from Nuxt Studio uploads or manual additions)
       rel = rel.startsWith('/') ? rel.slice(1) : rel
       const abs = path.join(publicDir, rel)
+      
+      // Priority 1: Check if file exists locally (Nuxt Studio uploads or manual files)
       if (fs.existsSync(abs)) {
-        return { resolvedUrl: abs }
+        return { resolvedUrl: abs, localPath: `/${rel}` }
       }
-      // Try ImageKit if available
+      
+      // Priority 2: Try downloading from ImageKit (for external repo images during development)
+      if (imagekitBaseEnv && !imagekitBaseEnv.includes('dureika')) {
+        // Only try ImageKit download if it's not our main endpoint
+        try {
+          const fileName = path.basename(rel)
+          const localPath = path.join(publicDir, 'external', fileName)
+          const imageKitUrl = `${imagekitBaseEnv}/${rel}`
+          
+          if (!fs.existsSync(localPath)) {
+            console.log(`📥 Downloading from ImageKit: ${imageKitUrl}`)
+            await downloadExternalImage(imageKitUrl, localPath)
+            if (fs.existsSync(localPath)) {
+              return { resolvedUrl: localPath, localPath: `/external/${fileName}` }
+            }
+          } else {
+            return { resolvedUrl: localPath, localPath: `/external/${fileName}` }
+          }
+        } catch (e) {
+          console.warn(`⚠️ Could not download from ImageKit: ${rel}`, e)
+        }
+      }
+      
+      // Priority 3: Use ImageKit URL for optimization (during build/production)
       if (imagekitBaseEnv) {
         const url = `${imagekitBaseEnv}/${rel}`
         return { resolvedUrl: url }
       }
-      // Try remote public assets if available
+      
+      // Priority 4: Fallback to remote public assets
       if (publicRemoteBaseEnv) {
         const base = publicRemoteBaseEnv.endsWith('/') ? publicRemoteBaseEnv.slice(0, -1) : publicRemoteBaseEnv
         const url = `${base}/${rel}`
