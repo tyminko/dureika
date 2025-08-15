@@ -25,38 +25,20 @@ const publicRemoteBaseEnv = process.env.PUBLIC_ASSETS_BASE
 
 export async function ContentAfterParseTransform(ctx: ParsedContextWithMinimark) {
   const { content } = ctx
-  console.log(`[mod:afterParse] Processing: ${content._file || 'unknown'}`)
-  if (!content.body || content.body.type !== 'minimark') {
-    console.log(`[mod:afterParse:skip] Not minimark content`)
-    return
-  }
-  try {
-    content.body.value = await Promise.all(content.body.value.map(transformNode))
-    console.log(`[mod:afterParse:success] Processed content successfully`)
-  } catch (error) {
-    console.error(`[mod:afterParse:error] Failed to process content:`, error)
-  }
+  if (!content.body || content.body.type !== 'minimark') return
+  content.body.value = await Promise.all(content.body.value.map(transformNode))
 }
 
 async function transformNode(node: MinimarkNode): Promise<MinimarkNode> {
   if (!Array.isArray(node)) return node
   const imgLike = imgLikeNode(node)
-  if (imgLike) {
+    if (imgLike) {
     const [_, attrs, ...children] = imgLike
-    console.log(`[mod:afterParse] Processing image: ${attrs.src}`)
     const imageData = await getImageData(attrs.src, 4)
-    console.log(`[mod:afterParse] Image data:`, { 
-      width: imageData?.width, 
-      height: imageData?.height, 
-      paletteLength: imageData?.palette?.length 
-    })
     const aspectRatio = imageData ? imageData.width / imageData.height : undefined
     let paletteVars: string | undefined
     if (imageData?.palette && imageData.palette.length === 16) {
       paletteVars = imageData.palette.map((hex, i) => `--c${i}:${hex}`).join(';')
-      console.log(`[mod:afterParse] Generated palette vars: ${paletteVars.substring(0, 50)}...`)
-    } else {
-      console.log(`[mod:afterParse] No palette generated for ${attrs.src}`)
     }
     const captionStr = attrs.caption || attrs.title || ''
     const captionNodes = (children.length === 0 && captionStr)

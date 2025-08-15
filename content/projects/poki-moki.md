@@ -8,13 +8,13 @@ date: 2024-01-15
 
 # Poki Moki
 
-![aa](sos-alys.jpg 'Caption could be here?')
+![aa](external/1-y4-a0713.jpg 'Caption could be here?')
 
-![aa](1-y4-a0713.jpg 'SofS @YC, Kharkiv')
+![aa](external/1-y4-a0713.jpg 'SofS @YC, Kharkiv')
 
-![](screenshot-2024-09-25-at-20.05.47.png "до коли пуки муки")
+![](external/1-y4-a0713.jpg "до коли пуки муки")
 
-::im{src="sos-alys.jpg"}
+::im{src="external/1-y4-a0713.jpg"}
   **This** is a [beautiful](/) image with a caption
 ::
 
