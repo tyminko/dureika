@@ -19,10 +19,9 @@ export default defineNuxtConfig({
   },
 
   app: {
-    baseURL: '/dureika/'
+    baseURL: process.env.NUXT_APP_BASE_URL || '/dureika/'
   },
 
-  // @ts-ignore - Nuxt Image module types
   image: {
     provider: 'imagekit',
     imagekit: {
