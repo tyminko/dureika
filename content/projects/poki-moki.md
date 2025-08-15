@@ -6,15 +6,15 @@ tags: [Vue.js, Nuxt.js, ImageKit, Tailwind CSS]
 date: 2024-01-15
 ---
 
-# Poki Moki  
+# Poki Moki
 
 ![aa](sos-alys.jpg 'Caption could be here?')
 
 ![aa](1-y4-a0713.jpg 'SofS @YC, Kharkiv')
 
-![](screenshot-2024-09-25-at-20.05.47.png "до коли пуки муки") 
+![](screenshot-2024-09-25-at-20.05.47.png "до коли пуки муки")
 
-::im{src="sos-alys.jpg"}  
+::im{src="sos-alys.jpg"}
   **This** is a [beautiful](/) image with a caption
 ::
 
@@ -37,5 +37,4 @@ Description of the project is here. Updated again!
 ## Project Gallery
 
 Here are some screenshots from the development process:
-<!--  
- 
+<!--
