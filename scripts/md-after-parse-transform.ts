@@ -159,12 +159,12 @@ async function resolveImageUrl(src: string): Promise<{ localPath?: string; resol
       // Handle local file paths (from Nuxt Studio uploads or manual additions)
       rel = rel.startsWith('/') ? rel.slice(1) : rel
       const abs = path.join(publicDir, rel)
-      
+
       // Priority 1: Check if file exists locally (Nuxt Studio uploads or manual files)
       if (fs.existsSync(abs)) {
         return { resolvedUrl: abs, localPath: `/${rel}` }
       }
-      
+
       // Priority 2: Try downloading from ImageKit (for external repo images during development)
       if (imagekitBaseEnv && !imagekitBaseEnv.includes('dureika')) {
         // Only try ImageKit download if it's not our main endpoint
@@ -172,7 +172,7 @@ async function resolveImageUrl(src: string): Promise<{ localPath?: string; resol
           const fileName = path.basename(rel)
           const localPath = path.join(publicDir, 'external', fileName)
           const imageKitUrl = `${imagekitBaseEnv}/${rel}`
-          
+
           if (!fs.existsSync(localPath)) {
             console.log(`📥 Downloading from ImageKit: ${imageKitUrl}`)
             await downloadExternalImage(imageKitUrl, localPath)
@@ -186,13 +186,13 @@ async function resolveImageUrl(src: string): Promise<{ localPath?: string; resol
           console.warn(`⚠️ Could not download from ImageKit: ${rel}`, e)
         }
       }
-      
+
       // Priority 3: Use ImageKit URL for optimization (during build/production)
       if (imagekitBaseEnv) {
         const url = `${imagekitBaseEnv}/${rel}`
         return { resolvedUrl: url }
       }
-      
+
       // Priority 4: Fallback to remote public assets
       if (publicRemoteBaseEnv) {
         const base = publicRemoteBaseEnv.endsWith('/') ? publicRemoteBaseEnv.slice(0, -1) : publicRemoteBaseEnv

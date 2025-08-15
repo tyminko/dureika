@@ -25,8 +25,8 @@ export default defineNuxtConfig({
   image: {
     provider: 'imagekit',
     imagekit: {
-      urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT || 'https://ik.imagekit.io/dureika',
-      baseURL: process.env.IMAGEKIT_URL_ENDPOINT || 'https://ik.imagekit.io/dureika'
+      urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT || 'https://ik.imagekit.io/mxm',
+      baseURL: process.env.IMAGEKIT_URL_ENDPOINT || 'https://ik.imagekit.io/mxm'
     },
     presets: {
       default: {
